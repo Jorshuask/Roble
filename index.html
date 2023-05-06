@@ -6,120 +6,492 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROBLE</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
+     <!-- Agrega el enlace de jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Agrega el enlace de Slick -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 
     <style>
-      /*para aprender*/
-        @media (max-width: 768px) {
-        /* Estilos para dispositivos móviles */}
-        @media (min-width: 769px) and (max-width: 1024px) {
-        /* Estilos para tabletas */}
-        @media (min-width: 1025px) {
-        /* Estilos para computadoras de escritorio y portátiles */}
+ 
+/* Estilos para pantallas pequeñas */
+@media screen and (max-width: 767px) {
+  header {
+    text-align: center;
+  }
 
-         header img {max-width: 100%; }
-         header h1 {font-size: 48px; margin: 0;}
-         header p { font-size: 24px;margin: 0;}
+  header h1 {
+    font-size: 36px;
+  }
 
-        body{ margin: 0;font-family: sans-serif; }
+  header p {
+    font-size: 18px;
+  }
 
-        #logo{height: 6.5vw;}
+  .logo {
+    width: 80px;
+    margin-right: 10px;
+  }
 
-        #buscador{height: 30px; width: 45vw; border-radius: 5px; margin-right: 4%;}
+  #buscador {
+    width: 60%;
+    margin: 10px auto;
+  }
 
-        .cont{background-color: white;
-             height: 6vw; width: 9vw;
-             border: 0ch; transition: 0.5s;
-             border-radius: 5px;font-size: 1vw;}
+  input[type="text"] {
+    font-size: 14px;
+  }
 
-        .cont:hover{background-color: #C9B9A7;}
+  button[type="submit"] {
+    font-size: 14px;
+  }
 
-        #top{ height:90vw; 
-           width: 100%;
-           background-image: url("casita.jpg");
-           background-position:center;
-           background-repeat:no-repeat;
-           background-attachment: fixed;
-           background-size:cover;	 }
+  #top {
+    height: 100vw;
+  }
 
-        h1{color:rgb(20, 20, 20);padding-top: 80px;padding-left: 60px; display: block; font-size: 3vw;}
+  h1 {
+    padding-top: 40px;
+    padding-left: 20px;
+    font-size: 5vw;
+  }
 
-        #contenedor{
-            background-color:rgb(253, 252, 251);
-            border-radius: 5px;
-            padding: 40px;
-            width: 87vw;
-            box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.5);
-            margin-left: 30px;
-            justify-content:space-between;
-            word-wrap: break-word; }
+  .contenedor {
+    width: 100%;
+    height: auto;
+    margin: 20px auto;
+    padding: 20px;
+  }
 
-        #contenido{
-         display: flex;
-         white-space: break-word;
-         max-height: 40vw;
-         width: 87vw;
-         word-wrap: break-word;}
-        #inf{padding: 40px; font-size: 1.2vw;}
+  #contenido {
+    display: block;
+    max-height: none;
+    width: 70%;
+  }
 
-        #img_arbol{ width: 25vw;height: auto; 
-          border: 5px solid rgb(205, 255, 130); 
-          border-radius: 2px;     
-          box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.5);}
+  #img_arbol {
+    width: 100%;
+  }
 
-        #footer{
-            background-color: #C9B9A7;
-            padding: 40px;
-            width: 93vw;
-            height: 100px;
-            font-size: 13px;
-            display: inline-block;}
+  #inf {
+    padding: 20px;
+    font-size: 14px;
+  }
+}
+
+
+
+  /* Estilos para computadoras de escritorio y portátiles */
+  @media (min-width: 1025px) {
+  }
+
+  #loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  #loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 3px solid #fff;
+    border-top-color: #66ccff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  #main-content.hidden {
+    opacity: 0;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Estilos predeterminados */
+  header img {
+    max-width: 100%;
+  }
+
+  header h1 {
+    font-size: 48px;
+    margin: 0;
+  }
+
+  header p {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .logo {
+    width: 100px; 
+    height: auto;
+    float: left;
+  margin-right: 20px;
+  }
   
-        footer p {font-size: 16px;margin: 0;}
-        footer ul {list-style: none;margin: 0;padding: 0; }
-        footer li { display: inline-block;margin: 0 10px;}
-        footer a {color: #333333; text-decoration: none;}
-        footer a:hover {text-decoration: underline;}
+
+  #banner{height: 6.7vw;}
+  #buscador {
+    height: 30px;
+    width: 40vw;
+    border-radius: 5px;
+    margin-left: 0%;
+  }
+  input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0062cc;
+}
+
+  .cont {
+    background-color: white;
+    height: 6vw;
+    width: 9vw;
+    border: 0ch;
+    transition: 0.2s;
+    border-radius: 30px;
+    font-size: 1.2vw;
+  }
+
+  .cont:hover {
+    background-color: #faf9f9;
+    color: #007bff;
+  }
+
+  #top {
+    height: auto;
+    width: 100%;
+    background-image: url("casita.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  h1 {
+    color: rgb(20, 20, 20);
+    padding-top: 80px;
+    padding-left: 60px;
+    display: block;
+    font-size: 3vw;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+
+  .contenedor {
+    background-color: rgb(253, 252, 251);
+    border-radius: 20px;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 20px 20px 20px rgb(0, 0, 0, 0.5);
+    height: auto;
+    justify-content: space-between;
+    word-wrap: break-word;
+  }
+
+        .contenido {
+            display: flex;
+            white-space: break-word;
+            max-height: 40vw;
+            
+            word-wrap: break-word;
+        }
+
+        #inf {
+            padding: 40px;
+            font-size: 1.2vw;
+        }
+
+        #img_arbol {
+            width: 25vw;
+            height: auto;
+            border: 5px solid rgb(205, 255, 130);
+            border-radius: 2px;
+            box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.5);
+            margin-right: 10px;
+        }
+
+        .animate-up {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: animateUp 0.5s ease-in-out 2s forwards;
+        }
+
+        @keyframes animateUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+     
+#inf {
+  padding: 40px;
+  font-size: 1.2vw;
+}
+
+#img_arbol {
+  width: 25vw;
+  height: auto;
+  border: 5px solid rgb(205, 255, 130);
+  border-radius: 2px;
+  box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.5);
+  margin-right: 5%;
+}
+
+.animate-up {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: animateUp 0.5s ease-in-out 2s forwards;
+}
+
+@keyframes animateUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+ 
+}
+.slider {
+  width: 100%; /* Ancho del carrusel */
+  margin: 0 auto; /* Centra el carrusel */
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black; /* Cambia el color de las flechas de navegación */
+}
+
+.footer-section {
+  flex: 1;
+  margin-bottom: 20px;
+  padding-right: 20px;
+  text-align: center;
+}
+
+.footer-section h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 5px;
+}
+
+.footer-section ul li a {
+  color: #777;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  color: #333;
+}
+.footer-section {
+  overflow: hidden;
+}
+.copy-right {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.copy-right p {
+  color: #777;
+  font-size: 14px;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+input[type="email"] {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  font-size: 14px;
+}
+
     </style>
 </head>
 <body>
-    <div id="banner"> <img id="logo" src="logo.jpg" align = center > <input type="text" id="buscador" placeholder="Buscador"> <button type="button" class="cont" onclick="inicio()">inicio</button>  <button type="button" class="cont" onclick="secciones()">Secciones</button>  <button type="button" class="cont" onclick="arboles()">Arboles</button>  <button type="button" class="cont" onclick="edificios()">Edificios</button></div>
-    <div id="top"><br><br><br><br>
-        <section id="contenedor"><h1 id="Roble">Roble</h1>
-            <div  id="contenido" >
-                <p id="inf" style="text-align: justify;">Los árboles de roble en Panamá son una especie forestal de gran importancia y belleza. Estos árboles son de hoja perenne y pueden crecer hasta una altura de 25 metros. Su tronco es grueso y fuerte, y su corteza es lisa y de color marrón grisáceo. Sus hojas son grandes, con forma de elipse, y tienen un color verde oscuro brillante en la parte superior y un tono plateado en la parte inferior.<br><br>Los robles en Panamá son valorados por su madera dura y resistente, que se utiliza en la construcción de muebles, puertas y ventanas, así como en la fabricación de instrumentos musicales y pisos de alta calidad. Además, los robles también son importantes para la biodiversidad de los bosques, ya que proporcionan refugio y alimento para una amplia variedad de animales, incluyendo aves, insectos y mamíferos.<br><br>Además, estos árboles son esenciales para la conservación del suelo, ya que sus raíces profundas ayudan a mantener la estabilidad del terreno. A pesar de su importancia, los bosques de robles en Panamá enfrentan varios desafíos, como la tala ilegal y la degradación del hábitat debido a la expansión de la agricultura y la urbanización. Es importante continuar trabajando para proteger y conservar estos valiosos recursos forestales para garantizar su supervivencia a largo plazo.<br><br>En resumen, los árboles de roble en Panamá son una especie importante y valiosa en la ecología y cultura del país. Además de proporcionar refugio y alimento para la fauna local, estos árboles son esenciales para la conservación del suelo y la protección de los bosques de montaña en Panamá.</p>
-                <img id="img_arbol" src="IMG_2330.JPG" width="100%">
-               </div><h5 style="text-align:right; padding-right: 5px; font-size: 1vw;">foto tomada el 3 de mayo del 2023</h5>
-        </section>
-    </div>
-    <div id="top"><br><br>
-      <section id="contenedor"><h1 id="Roble">Roble</h1>
-          <div  id="contenido" >
-              <p id="inf" style="text-align: justify;">Los árboles de roble en Panamá son una especie forestal de gran importancia y belleza. Estos árboles son de hoja perenne y pueden crecer hasta una altura de 25 metros. Su tronco es grueso y fuerte, y su corteza es lisa y de color marrón grisáceo. Sus hojas son grandes, con forma de elipse, y tienen un color verde oscuro brillante en la parte superior y un tono plateado en la parte inferior.<br><br>Los robles en Panamá son valorados por su madera dura y resistente, que se utiliza en la construcción de muebles, puertas y ventanas, así como en la fabricación de instrumentos musicales y pisos de alta calidad. Además, los robles también son importantes para la biodiversidad de los bosques, ya que proporcionan refugio y alimento para una amplia variedad de animales, incluyendo aves, insectos y mamíferos.<br><br>Además, estos árboles son esenciales para la conservación del suelo, ya que sus raíces profundas ayudan a mantener la estabilidad del terreno. A pesar de su importancia, los bosques de robles en Panamá enfrentan varios desafíos, como la tala ilegal y la degradación del hábitat debido a la expansión de la agricultura y la urbanización. Es importante continuar trabajando para proteger y conservar estos valiosos recursos forestales para garantizar su supervivencia a largo plazo.<br><br>En resumen, los árboles de roble en Panamá son una especie importante y valiosa en la ecología y cultura del país. Además de proporcionar refugio y alimento para la fauna local, estos árboles son esenciales para la conservación del suelo y la protección de los bosques de montaña en Panamá.</p>
-              <img id="img_arbol" src="IMG_2330.JPG" width="100%">
-             </div><h5 style="text-align:right; padding-right: 5px; font-size: 1vw;">foto tomada el 3 de mayo del 2023</h5>
-      </section>
+  <div id="loader-container">
+    <div id="loader"></div>
   </div>
-
-    <div id="footer">
-    
-        <footer>
-           <ul>
-            <li><a href="#contenido">Universidad Tecnológica de Panamá - 2023</a></li><br>
-            <li><a href="#"> Dirección: Avenida Universidad Tecnológica de Panamá, Vía Puente Centenario,Campus Metropolitano Víctor Levi Sasso.</a></li><br>
-            <li><a href="#"> Teléfono. (507) 560-3000</a></li>
-            <li><a href="#">Correo electrónico: buzondesugerencias@utp.ac.pa</a></li><br>
-            <li><a href="#">311 Centro de Atención Ciudadana</a></li>
-          </ul>
-            </footer>
-
+  
+  <div id="main-content" class="hidden">
+    <!-- Contenido de la página -->
+    <div id="banner">
+      <img class="logo" src="logo.jpg" align="center"  style="height: 80px; width: auto; margin-bottom: 10px;">
+      
+      <form style="display: inline-block;">
+        <input type="text" id="buscador" placeholder="Buscar...">
+        <button type="submit">Buscar</button>
+      </form>
+      <button type="button" class="cont" onclick="inicio()">inicio</button>
+      <button type="button" class="cont" onclick="secciones()">Secciones</button>
+      <button type="button" class="cont" onclick="arboles()">Arboles</button>
+      <button type="button" class="cont" onclick="edificios()">Edificios</button>
     </div>
+    <div id="top"><br><br><br><br><br><br>
+     <div style="width: 95%; margin: 0 auto;">
+      <div class="slider">
+        <section class="contenedor" >
+          <h1 id="Roble">Roble</h1>
+          <article class="contenido">
+            <p id="inf" style="text-align: justify;">Los árboles de roble en Panamá son una especie forestal de gran importancia y belleza. Estos árboles son de hoja perenne y pueden crecer hasta una altura de 25 metros. Su tronco es grueso y fuerte, y su corteza es lisa y de color marrón grisáceo. Sus hojas son grandes, con forma de elipse, y tienen un color verde oscuro brillante en la parte superior y un tono plateado en la parte inferior.<br><br>Los robles en Panamá son valorados por su madera dura y resistente, que se utiliza en la construcción de muebles, puertas y ventanas, así como en la fabricación de instrumentos musicales y pisos de alta calidad. Además, los robles también son importantes para la biodiversidad de los bosques, ya que proporcionan refugio y alimento para una amplia variedad de animales, incluyendo aves, insectos y mamíferos.<br><br>Además, estos árboles son esenciales para la conservación del suelo, ya que sus raíces profundas ayudan a mantener la estabilidad del terreno. A pesar de su importancia, los bosques de robles en Panamá enfrentan varios desafíos, como la tala ilegal y la degradación del hábitat debido a la expansión de la agricultura y la urbanización. Es importante continuar trabajando para proteger y conservar estos valiosos recursos forestales para garantizar su supervivencia a largo plazo.<br><br>En resumen, los árboles de roble en Panamá son una especie importante y valiosa en la ecología y cultura del país. Además de proporcionar refugio y alimento para la fauna local, estos árboles son esenciales para la conservación del suelo y la protección de los bosques de montaña en Panamá.</p>
+            <img id="img_arbol" src="IMG_2330.JPG" width="100%" class="animate-up" alt="arbol de roble">
+          </article>
+          <h5 style="text-align:right; padding-right: 5%; font-size: 1vw;">foto tomada el 3 de mayo del 2023</h5>
+        </section>
+      
+    
+        <section class="contenedor" >
+          <h1 id="Roble">Roble</h1>
+          <article class="contenido">
+            <p id="inf" style="text-align: justify;">Los árboles de roble en Panamá son una especie forestal de gran importancia y belleza. Estos árboles son de hoja perenne y pueden crecer hasta una altura de 25 metros. Su tronco es grueso y fuerte, y su corteza es lisa y de color marrón grisáceo. Sus hojas son grandes, con forma de elipse, y tienen un color verde oscuro brillante en la parte superior y un tono plateado en la parte inferior.<br><br>Los robles en Panamá son valorados por su madera dura y resistente, que se utiliza en la construcción de muebles, puertas y ventanas, así como en la fabricación de instrumentos musicales y pisos de alta calidad. Además, los robles también son importantes para la biodiversidad de los bosques, ya que proporcionan refugio y alimento para una amplia variedad de animales, incluyendo aves, insectos y mamíferos.<br><br>Además, estos árboles son esenciales para la conservación del suelo, ya que sus raíces profundas ayudan a mantener la estabilidad del terreno. A pesar de su importancia, los bosques de robles en Panamá enfrentan varios desafíos, como la tala ilegal y la degradación del hábitat debido a la expansión de la agricultura y la urbanización. Es importante continuar trabajando para proteger y conservar estos valiosos recursos forestales para garantizar su supervivencia a largo plazo.<br><br>En resumen, los árboles de roble en Panamá son una especie importante y valiosa en la ecología y cultura del país. Además de proporcionar refugio y alimento para la fauna local, estos árboles son esenciales para la conservación del suelo y la protección de los bosques de montaña en Panamá.</p>
+            <img id="img_arbol" src="IMG_2330.JPG" width="100%" class="animate-up" alt="arbol de roble">
+          </article>
+          <h5 style="text-align:right; padding-right: 5%; font-size: 1vw;">foto tomada el 3 de mayo del 2023</h5>
+        </section>
+      </div>
+     </div><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="footer-section">
+        
+          <h3>Contacto</h3>
+          <ul>
+            <li><a href="mailto:info@utp.ac.pa">Correo electrónico</a></li>
+            <li><a href="tel:+5075235353">Teléfono</a></li>
+            <li><a href="https://www.instagram.com/utppanama/">Redes sociales</a></li>
+          </ul>
+        </div>  <img class="logo" src="logo.jpg" alt="Logo de la UTP"  style="padding: 10px;">
+        <div class="footer-section">
+         
+          <h3>Enlaces útiles</h3>
+          <ul>
+            <li><a href="https://utp.ac.pa/">Sobre la UTP</a></li>
+            <li><a href="https://matricula.utp.ac.pa/Session/Cuenta/Validar/">Matricula</a></li>
+            <li><a href="https://utp.ac.pa/mapas-de-ubicacion">Mapa de ubicación</a></li>
+          </ul>
+        </div>
+      
+      </div>
+      <div class="copy-right">
+        <p>Derechos reservados &copy; 2023 Universidad Tecnológica de Panamá</p>
+      </div>
+    </footer> 
+    
+  </div>
+   
   
     <script type="text/javascript">
       function inicio() { window.location.href = "#Roble"; }
       function secciones() { window.location.href = "#Roble"; }
       function arboles() { window.location.href = "#Roble"; }
       function edificios() { window.location.href = "#Roble"; }
-     
+
+      var animatedElements = document.querySelectorAll('.animate-up');
+      window.addEventListener('scroll', function() {
+        for (var i = 0; i < animatedElements.length; i++) {
+          var element = animatedElements[i];
+          var elementPosition = element.getBoundingClientRect().top;
+          var screenHeight = window.innerHeight;
+          if (elementPosition < screenHeight) {
+            element.classList.add('animate');
+          }
+        }
+      });
+      window.addEventListener('load', function() {
+  var loaderContainer = document.getElementById('loader-container');
+  var mainContent = document.getElementById('main-content');
+  
+  setTimeout(function() {
+    loaderContainer.style.opacity = '0';
+    loaderContainer.style.pointerEvents = 'none';
+    mainContent.classList.remove('hidden');
+  }, 1000);
+});
+$(document).ready(function(){
+  $('.slider').slick({
+    arrows: false, // Muestra flechas de navegación
+    dots: false, // Muestra los puntos de navegación
+    infinite: false, // Habilita la navegación infinita
+    speed: 500, // Velocidad de la transición
+    slidesToShow: 1, // Número de diapositivas a mostrar al mismo tiempo
+    slidesToScroll: 1, // Número de diapositivas a desplazarse por cada clic
+    autoplay: true, // Inicia la reproducción automática
+    autoplaySpeed: 4000 // Tiempo de espera entre cada diapositiva
+  });
+});
    </script>
 </body>
 </html>
